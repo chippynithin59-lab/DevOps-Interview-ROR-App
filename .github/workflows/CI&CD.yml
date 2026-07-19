@@ -1,0 +1,57 @@
+name: Build and Push to ECR
+
+on:
+  push:
+    branches: [main]
+
+env:
+  AWS_REGION: us-east-1
+  RAILS_ECR_REPO: ror-app/rails-app
+  NGINX_ECR_REPO: ror-app/nginx
+
+permissions:
+  id-token: write # required for OIDC -- no static AWS keys stored in GitHub
+  contents: read
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::169728770653:role/ror-app-github-actions-ecr
+          aws-region: ${{ env.AWS_REGION }}
+          
+      - name: Login to ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push rails-app image
+        env:
+          REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+        run: |
+          docker build -t $REGISTRY/${{ env.RAILS_ECR_REPO }}:${{ github.sha }} \
+                        -t $REGISTRY/${{ env.RAILS_ECR_REPO }}:latest \
+                        -f docker/app/Dockerfile .
+          docker push $REGISTRY/${{ env.RAILS_ECR_REPO }}:${{ github.sha }}
+          docker push $REGISTRY/${{ env.RAILS_ECR_REPO }}:latest
+
+      - name: Build and push nginx image
+        env:
+          REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+        run: |
+          docker build -t $REGISTRY/${{ env.NGINX_ECR_REPO }}:${{ github.sha }} \
+                        -t $REGISTRY/${{ env.NGINX_ECR_REPO }}:latest \
+                        -f docker/nginx/Dockerfile .
+          docker push $REGISTRY/${{ env.NGINX_ECR_REPO }}:${{ github.sha }}
+          docker push $REGISTRY/${{ env.NGINX_ECR_REPO }}:latest
+
+      - name: Summary
+        run: |
+          echo "### Images pushed" >> $GITHUB_STEP_SUMMARY
+          echo "- rails-app: \`${{ github.sha }}\` and \`latest\`" >> $GITHUB_STEP_SUMMARY
+          echo "- nginx: \`${{ github.sha }}\` and \`latest\`" >> $GITHUB_STEP_SUMMARY
