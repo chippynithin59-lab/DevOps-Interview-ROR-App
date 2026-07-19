@@ -2,7 +2,7 @@ name: Build and Push to ECR
 
 on:
   push:
-    branches: [main]
+    branches: [feature/chippy-devops-assignment]
 
 env:
   AWS_REGION: us-east-1
