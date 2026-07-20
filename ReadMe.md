@@ -53,23 +53,24 @@ gateways, IAM (including IRSA and GitHub OIDC federation), Secrets Manager.
 │   │   ├── variables.tf
 │   │   ├── terraform.tfvars
 │   │   ├── vpc.tf
+|   |   |---alb.tf 
 │   │   ├── security_groups.tf
 │   │   ├── iam.tf
 │   │   ├── ecr.tf
 │   │   ├── eks.tf
 │   │   ├── rds.tf
 │   │   ├── s3.tf
-│   │   ├── alb.tf
+│   │   ├── nodegroup.tf
+|   |   |---github_oidc.tf 
 │   │   └── outputs.tf
 │   └── kubernetes
-│       ├── namespace.yaml
+│       ├── namespace.yml
 │       ├── deployment.yml
-│       ├── service.yaml
+│       ├── service.yml
 │       ├── hpa.yaml
-│       ├── ingress.yaml
-│       ├── configmap.yaml
-│       ├── ServiceAccount.yaml
-│       └── secret.yaml
+│       ├── ingress.yml
+│       ├── Serviceaccount.yml
+│       └── secrets.yml
 └── README.md
 ```
 
