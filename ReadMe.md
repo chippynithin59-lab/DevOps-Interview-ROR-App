@@ -34,8 +34,7 @@ EC2 (EKS worker nodes), EKS, RDS (Postgres), S3, ALB, ECR, VPC/subnets/NAT
 gateways, IAM (including IRSA and GitHub OIDC federation), Secrets Manager.
 
 ## Repository structure
-
-.
+```
 ├── docker
 │   ├── app
 │   │   ├── Dockerfile            # Rails container (provided, unedited)
@@ -75,7 +74,7 @@ gateways, IAM (including IRSA and GitHub OIDC federation), Secrets Manager.
 │       └── secret.yaml
 ├── architecture-diagram.svg
 └── README.md
-
+```
 
 ## Environment variables
 
