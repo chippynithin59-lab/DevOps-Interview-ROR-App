@@ -52,7 +52,6 @@ gateways, IAM (including IRSA and GitHub OIDC federation), Secrets Manager.
 │   │   ├── provider.tf
 │   │   ├── variables.tf
 │   │   ├── terraform.tfvars
-│   │   ├── locals.tf
 │   │   ├── vpc.tf
 │   │   ├── security_groups.tf
 │   │   ├── iam.tf
@@ -61,18 +60,16 @@ gateways, IAM (including IRSA and GitHub OIDC federation), Secrets Manager.
 │   │   ├── rds.tf
 │   │   ├── s3.tf
 │   │   ├── alb.tf
-│   │   ├── cloudwatch.tf
 │   │   └── outputs.tf
 │   └── kubernetes
 │       ├── namespace.yaml
-│       ├── rails-deployment.yaml
-│       ├── rails-service.yaml
-│       ├── nginx-deployment.yaml
-│       ├── nginx-service.yaml
+│       ├── deployment.yml
+│       ├── service.yaml
+│       ├── hpa.yaml
 │       ├── ingress.yaml
 │       ├── configmap.yaml
+│       ├── ServiceAccount.yaml
 │       └── secret.yaml
-├── architecture-diagram.svg
 └── README.md
 ```
 
