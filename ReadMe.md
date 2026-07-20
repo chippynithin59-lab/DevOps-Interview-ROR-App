@@ -1,4 +1,4 @@
-# Ruby on Rails on Amazon EKS — DevOps Assignment Submission
+# Ruby on Rails on Amazon EKS — DevOps Assignment Submission by chippy Thomas 
 
 Infrastructure-as-code deployment of the provided Rails + Nginx application to
 Amazon EKS, with a GitHub Actions CI/CD pipeline building Docker images to
