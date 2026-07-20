@@ -112,3 +112,5 @@ ConfigMap (non-sensitive) and Secret (credentials):
   `.gitignore`d, since Terraform state contains the RDS password in
   plaintext.
 
+## Screnshots
+Screenshots of progress are available at ./infrastructure/Screenshots/
